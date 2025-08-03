@@ -1,19 +1,111 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap');
+
 :root {
     --color1: #000E28;
     --color2: #203556;
-    --color3: #F7F7F7;
-    --color4: #FFFFFF;
+    --color3: #7796CB;
+    --color4: #F7F7F7;
     --color5: #121212; 
+    --title-font: 'Quantico';
+    --text-font: 'Karla';
 }
 
-@media screen and (max-width: 768px) {
 
+* {
+    margin: 0px;
+    padding: 0px;
 }
+
+body {
+    background-color: var(--color3);
+}
+
+header {
+    background-color: var(--color1);
+    padding-top: 20px;
+    padding-bottom: 10px;
+    color: var(--color4);
+    text-align: center;
+}
+
+header h1{
+    font-family: var(--title-font);
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+header p {
+    font-family: var(--text-font);
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+nav {
+    background-color: var(--color2);
+    box-shadow: 0px 1px 5px #00000080;
+    padding: 10px;
+}
+
+nav a {
+    font-family: var(--text-font);
+    font-weight: bold;
+    color: var(--color4);
+    padding: 0px 10px;
+}
+
+nav a:hover {
+    color: var(--color3);
+}
+
+main {
+    background-color: var(--color4);
+    margin: auto;
+    padding: 15px;
+    max-width: 1000px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+main h2 {
+    font-family: var(--title-font);
+    text-align: center;
+}
+
+main p {
+    font-family: var(--text-font);
+    text-indent: 30px;
+    text-align: justify;
+    margin: 15px;
+}
+
+main ul {
+    margin: 0px 20px;
+}
+
+main li {
+    font-family: var(--text-font);
+}
+
+footer {
+    background-color: var(--color2);
+    box-shadow: 0px 1px 5px #00000080;
+    font-family: var(--text-font);
+    padding: 10px;
+    text-align: center;
+    color: var(--color4);
+}
+
+footer a {
+    color: var(--color4);
+}
+
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
 
 }
 
 @media screen and (min-width: 1024px) {
-    
+
 }
