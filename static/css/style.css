@@ -12,7 +12,6 @@
     --text-font: 'Karla';
 }
 
-
 * {
     margin: 0px;
     padding: 0px;
@@ -24,9 +23,9 @@ body {
 
 header {
     background-color: var(--color1);
+    color: var(--color4);
     padding-top: 20px;
     padding-bottom: 10px;
-    color: var(--color4);
     text-align: center;
 }
 
@@ -46,6 +45,8 @@ nav {
     background-color: var(--color2);
     box-shadow: 0px 1px 5px #00000080;
     padding: 10px;
+    position: sticky;
+    top: 0;
 }
 
 nav a {
@@ -62,10 +63,12 @@ nav a:hover {
 main {
     background-color: var(--color4);
     margin: auto;
+    margin-bottom: 30px;
     padding: 15px;
-    max-width: 1000px;
+    max-width: 900px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
+    box-shadow: 0px 1px 5px #00000080;
 }
 
 main h2 {
@@ -81,24 +84,44 @@ main p {
 }
 
 main ul {
-    margin: 0px 20px;
+    margin: 0px 0px 20px 20px;
 }
 
 main li {
     font-family: var(--text-font);
 }
 
+main a {
+    color: var(--color2);
+}
+
+main a:hover {
+    color: var(--color1);
+}
+
+#atom {
+    width: 200px;
+    margin: auto;
+    margin-top: 30px;
+    display: block
+}
+
 footer {
     background-color: var(--color2);
-    box-shadow: 0px 1px 5px #00000080;
     font-family: var(--text-font);
     padding: 10px;
     text-align: center;
     color: var(--color4);
+    position: sticky;
+    bottom: 0;
 }
 
 footer a {
     color: var(--color4);
+}
+
+footer a:hover {
+    color: var(--color3);
 }
 
 
