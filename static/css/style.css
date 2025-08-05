@@ -83,7 +83,7 @@ main h2 {
     text-align: center;
 }
 
-#obs {
+#post-script {
     text-indent: 0px;
 }
 
@@ -117,13 +117,27 @@ main a:hover {
 }
 
 #atom {
-    width: 200px;
-    margin: auto;
+    width: 150px;
     margin-top: 30px;
+    margin-right: 20px;
     display: block
 }
 
-#introducao {
+#ifba-logo {
+    width: 150px;
+    margin-top: 30px;
+    margin-left: 20px;
+    display: block
+}
+
+#logos {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-bottom: 50px;
+}
+
+#introduction-images {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -173,6 +187,18 @@ footer a:hover {
 
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+    #atom {
+        width: 175px;
+        margin-right: 30px;
+        display: block
+}
+
+    #ifba-logo {
+        width: 175px;
+        margin-left: 30px;
+        display: block
+}
+    
     #shock-absorber {
     width: 175px;
     margin-right: 30px;
@@ -187,6 +213,18 @@ footer a:hover {
 }
 
 @media screen and (min-width: 1024px) {
+    #atom {
+    width: 200px;
+    margin-right: 40px;
+    display: block
+}
+
+    #ifba-logo {
+        width: 200px;
+        margin-left: 40px;
+        display: block
+}
+
     #shock-absorber {
     width: 200px;
     margin-right: 40px;
