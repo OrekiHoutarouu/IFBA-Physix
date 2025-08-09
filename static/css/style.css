@@ -191,7 +191,7 @@ label {
     font-family: var(--text-font);
 }
 
-#submit_button {
+.submit_button {
     background-color: var(--color2);
     color: var(--color4);
     font-family: var(--text-font);
@@ -202,7 +202,7 @@ label {
     transition-duration: 0.3s;
 }
 
-#delete_button {
+.delete_button {
     background-color: var(--color6);
     color: var(--color4);
     font-family: var(--text-font);
@@ -240,12 +240,12 @@ label {
         font-size: 1.1em;
     }
 
-    #submit_button:hover {
+    .submit_button:hover {
         color: var(--color3);
         font-size: 1.1em;
     }
 
-    #delete_button:hover {
+    .delete_button:hover {
         color: var(--color7);
         font-size: 1.1em;
     }
@@ -296,12 +296,12 @@ label {
         font-size: 1.1em;
     }
 
-    #submit_button:hover {
+    .submit_button:hover {
         color: var(--color3);
         font-size: 1.1em;
     }
 
-    #delete_button:hover {
+    .delete_button:hover {
         color: var(--color7);
         font-size: 1.1em;
     }
