@@ -81,8 +81,10 @@ function check_filled_out(submit_button, warning) {
         for (let measurement in measurements){
             total += measurements[measurement]
         }
+        
+        let average = total /6
 
-        warning.innerText = `Dados enviados com sucesso, comprimento médio de ${(total/6).toFixed(2)}m`
+        warning.innerText = `Dados enviados com sucesso, comprimento médio de ${(average).toFixed(2)}m`
         warning.style.color = "green"
     }
 }
