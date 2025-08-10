@@ -183,6 +183,10 @@ footer a {
     transition-duration: 0.3s;
 }
 
+fieldset {
+    margin: 10px 0px;
+}
+
 legend {
     font-family: var(--text-font);
 }
@@ -218,6 +222,18 @@ label {
     padding: 5px;
     margin: 2px;
 } 
+
+.new_measurement_input {
+    width: 50px;
+    padding: 5px;
+    margin: 2px;
+}
+
+.mass_input {
+    width: 50px;
+    padding: 5px;
+    margin: 2px;
+}
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
     nav a:hover {
