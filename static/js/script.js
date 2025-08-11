@@ -1,4 +1,5 @@
 let counter = 0
+let all_springs_data = []
 
 function add_spring() {
     counter++
@@ -66,9 +67,9 @@ function check_filled_out_measurements(submit_button, warning) {
             total += measurements[measurement]
         }
         
-        let average = total / 6
+        let rest_length = total / 6
         
-        warning.innerText = `Dados enviados com sucesso, comprimento médio de ${(average).toFixed(2)}m`
+        warning.innerText = `Dados enviados com sucesso, comprimento médio de ${(rest_length).toFixed(2)}m`
         warning.style.color = "green"
         
         const p = document.createElement("p")
@@ -120,7 +121,7 @@ function add_submit_button(fieldset) {
     submit_button.value = "Enviar"
     submit_button.classList.add("submit_button")
     submit_button.onclick = function() {
-        check_filled_out_mass(warning)
+        check_filled_out_mass(fieldset, warning)
     }
     
     fieldset.appendChild(submit_button)
@@ -128,7 +129,7 @@ function add_submit_button(fieldset) {
 }
 
 
-function check_filled_out_mass(warning) {
+function check_filled_out_mass(fieldset, warning) {
     const mass_inputs = document.querySelectorAll(".mass_input")
     const new_measurement_input = document.querySelectorAll(".new_measurement_input")
     let filled = true
@@ -153,6 +154,10 @@ function check_filled_out_mass(warning) {
         warning.innerText = "Por favor, preencha todos os campos com números antes de enviar"
         warning.style.color = "red"
     } else {
+        const data = calculate_spring_data(fieldset)
+        all_springs_data.push(data)
+        console.log(data)
+        
         warning.innerText = `Dados enviados com sucesso`
         warning.style.color = "green"
     }
@@ -177,4 +182,38 @@ function delete_spring(delete_button) {
     const fieldset = delete_button.closest("fieldset")
     
     fieldset.remove()
+}
+
+function calculate_spring_data(fieldset) {
+    const initial_measurements = fieldset.querySelectorAll(".measurement_input")
+    let total = 0
+
+    initial_measurements.forEach(input => {
+        total += parseFloat(input.value.trim())        
+    });
+    
+    const rest_length = total / 6
+
+    const mass_inputs = fieldset.querySelectorAll(".mass_input")
+    const new_measurements = fieldset.querySelectorAll(".new_measurement_input")
+
+    const gravitational_acceleration = 9.81
+    let data = []
+
+    for (let c = 0; c < mass_inputs.length; c++) {
+        const mass = parseFloat(mass_inputs[c].value)
+        const final_length = parseFloat(new_measurements[c].value)
+        const displacement = final_length - rest_length
+        const weigth_force = mass * gravitational_acceleration
+        const elastic_constant = weigth_force / displacement
+
+        data.push({
+            mass: mass,
+            final_length: final_length,
+            displacement: displacement,
+            weigth_force: weigth_force,
+            elastic_constant: elastic_constant,
+        })
+    }
+    return data
 }
