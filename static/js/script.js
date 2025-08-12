@@ -8,7 +8,8 @@ function add_spring() {
     const fieldset = document.createElement("fieldset")
     const fieldset_legend = document.createElement("legend")
     const warning = document.createElement("p")
-    
+
+    fieldset.dataset.spring_id = String(counter)
     fieldset_legend.innerText = `Mola ${counter}`
     
     fieldset.appendChild(fieldset_legend)
@@ -22,9 +23,9 @@ function add_spring() {
         label.innerText = `Medição ${c} em metro`
         measurement.classList.add("measurement_input")
         
-        fieldset.append(measurement)
-        fieldset.append(label)
-        fieldset.append(br)
+        fieldset.appendChild(measurement)
+        fieldset.appendChild(label)
+        fieldset.appendChild(br)
     }
     
     const submit_button = document.createElement("input")
@@ -69,7 +70,7 @@ function check_filled_out_measurements(submit_button, warning) {
         
         let rest_length = total / 6
         
-        warning.innerText = `Dados enviados com sucesso, comprimento médio de ${(rest_length).toFixed(2)}m`
+        warning.innerText = `Dados enviados com sucesso, comprimento médio de ${(rest_length).toFixed(4)}m`
         warning.style.color = "green"
         
         const p = document.createElement("p")
@@ -155,8 +156,16 @@ function check_filled_out_mass(fieldset, warning) {
         warning.style.color = "red"
     } else {
         const data = calculate_spring_data(fieldset)
-        all_springs_data.push(data)
-        console.log(data)
+        const spring_id = parseInt(fieldset.dataset.spring_id)
+
+        const existing_index = all_springs_data.findIndex(item => item.spring_id === spring_id)
+        if (existing_index >= 0) {
+            all_springs_data[existing_index] = {spring_id, data}
+        } else {
+            all_springs_data.push({spring_id, data})
+        }
+
+        plot_graphic()
         
         warning.innerText = `Dados enviados com sucesso`
         warning.style.color = "green"
@@ -180,8 +189,12 @@ function add_delete_button(fieldset) {
 
 function delete_spring(delete_button) {
     const fieldset = delete_button.closest("fieldset")
-    
-    fieldset.remove()
+    const spring_id = parseInt(fieldset.dataset.spring_id || '-1', 10)
+
+    all_springs_data = all_springs_data.filter(item => item.spring_id !== spring_id);
+
+    fieldset.remove();
+    plot_graphic();
 }
 
 function calculate_spring_data(fieldset) {
@@ -216,4 +229,8 @@ function calculate_spring_data(fieldset) {
         })
     }
     return data
+}
+
+function plot_graphic() {
+    
 }
