@@ -235,28 +235,25 @@ function calculate_spring_data(fieldset) {
 
 
 function plot_spring_graph() {
-    console.log("ALL SPRINGS DATA:", JSON.stringify(all_springs_data, null, 2));
-    const canvas = document.getElementById('spring_graph');
-    if (!canvas) return;
+    const canvas = document.getElementById('spring_graph')
+    if (!canvas) return
 
-    const ctx = canvas.getContext('2d');
-    const datasets = [];
+    const ctx = canvas.getContext('2d')
+    const datasets = []
 
     all_springs_data.forEach((spring_entry, idx) => {
-        const spring_id = spring_entry.spring_id;
+        const spring_id = spring_entry.spring_id
 
-        // filtra pontos válidos
         const points = spring_entry.data
             .map(p => ({
                 x: parseFloat(p.displacement),
                 y: parseFloat(p.weight_force)
             }))
             .filter(p => !isNaN(p.x) && !isNaN(p.y))
-            .sort((a, b) => a.x - b.x); // ordena pelo deslocamento
+            .sort((a, b) => a.x - b.x)
 
-        if (points.length === 0) return; // ignora se não há dados válidos
+        if (points.length === 0) return;
 
-        // dataset de pontos reais
         datasets.push({
             label: `Mola ${spring_id} (pontos)`,
             data: points,
@@ -264,35 +261,32 @@ function plot_spring_graph() {
             pointRadius: 4,
             borderColor: get_color(idx),
             backgroundColor: get_color(idx, 0.8),
-        });
+        })
 
-        // calcular ajuste linear
-        const fit = linear_fit(points);
+        const fit = linear_fit(points)
 
-        // pontos da reta de ajuste
-        const min_x = points[0].x;
-        const max_x = points[points.length - 1].x;
+        const min_x = points[0].x
+        const max_x = points[points.length - 1].x
         const fit_points = [
             { x: min_x, y: fit.slope * min_x + fit.intercept },
             { x: max_x, y: fit.slope * max_x + fit.intercept }
-        ];
+        ]
 
         datasets.push({
             label: `Ajuste Mola ${spring_id} — k=${fit.slope.toFixed(2)} N/m`,
             data: fit_points,
-            type: 'line', // força Chart.js a desenhar linha
+            type: 'line', 
             fill: false,
             borderColor: get_color(idx),
             backgroundColor: get_color(idx, 0.2),
             pointRadius: 0,
             borderDash: [6, 4],
-        });
-    });
+        })
+    })
 
-    // recria gráfico
     if (chart) {
-        chart.destroy();
-        chart = null;
+        chart.destroy()
+        chart = null
     }
 
     chart = new Chart(ctx, {
@@ -309,7 +303,7 @@ function plot_spring_graph() {
                 y: { title: { display: true, text: 'Força (N)' } }
             }
         }
-    });
+    })
 }
 
 
@@ -321,31 +315,30 @@ function get_color(index, alpha = 1) {
     `rgba(255, 206, 86, ${alpha})`,
     `rgba(153, 102, 255, ${alpha})`,
     `rgba(255, 159, 64, ${alpha})`,
-  ];
-  return palette[index % palette.length];
+  ]
+  return palette[index % palette.length]
 }
 
-// regressão linear simples (y = slope * x + intercept) - mínimos quadrados
+
 function linear_fit(points) {
-  const n = points.length;
-  if (n === 0) return { slope: 0, intercept: 0 };
+  const n = points.length
+  if (n === 0) return { slope: 0, intercept: 0 }
 
-  let sum_x = 0, sum_y = 0, sum_xy = 0, sum_xx = 0;
+  let sum_x = 0, sum_y = 0, sum_xy = 0, sum_xx = 0
   points.forEach(p => {
-    sum_x += p.x;
-    sum_y += p.y;
-    sum_xy += p.x * p.y;
-    sum_xx += p.x * p.x;
-  });
+    sum_x += p.x
+    sum_y += p.y
+    sum_xy += p.x * p.y
+    sum_xx += p.x * p.x
+  })
 
-  const denom = n * sum_xx - sum_x * sum_x;
+  const denom = n * sum_xx - sum_x * sum_x
   if (Math.abs(denom) < 1e-12) {
-    // caso degenerado (todos os x iguais) — tenta forçar intercept = 0
-    const slope = sum_x !== 0 ? (sum_y / sum_x) : 0;
-    return { slope: slope, intercept: 0 };
+    const slope = sum_x !== 0 ? (sum_y / sum_x) : 0
+    return { slope: slope, intercept: 0 }
   }
 
-  const slope = (n * sum_xy - sum_x * sum_y) / denom;
-  const intercept = (sum_y - slope * sum_x) / n;
-  return { slope, intercept };
+  const slope = (n * sum_xy - sum_x * sum_y) / denom
+  const intercept = (sum_y - slope * sum_x) / n
+  return { slope, intercept }
 }
