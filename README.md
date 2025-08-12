@@ -30,6 +30,6 @@ Contribuições são bem-vindas! Se você quiser ajudar a melhorar este projeto,
 
 ## Acesse o site 🌐
 
-Você pode visualizar os experimentos diretamente em:
+Você pode visualizar os experimentos diretamente em: https://ifba-physix.netlify.app
 
 🔗
