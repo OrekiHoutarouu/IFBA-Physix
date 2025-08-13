@@ -132,8 +132,8 @@ function add_submit_button(fieldset) {
 
 
 function check_filled_out_mass(fieldset, warning) {
-    const mass_inputs = document.querySelectorAll(".mass_input")
-    const new_measurement_input = document.querySelectorAll(".new_measurement_input")
+    const mass_inputs = fieldset.querySelectorAll(".mass_input")
+    const new_measurement_input = fieldset.querySelectorAll(".new_measurement_input")
     let filled = true
     
     mass_inputs.forEach(input => {
